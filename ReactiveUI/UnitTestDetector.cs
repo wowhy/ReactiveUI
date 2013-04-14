@@ -26,8 +26,8 @@ namespace ReactiveUI
         {
             if (!isInUnitTestRunner.HasValue) {
                 // assuming Microsoft.Reactive.Testing is always used
-                string testSchedulerAQN = testType ?? "Microsoft.Reactive.Testing.TestScheduler, Microsoft.Reactive.Testing";
-                isInUnitTestRunner = Type.GetType(testSchedulerAQN, false) != null;
+                string testAQN = testType ?? "ReactiveUI.Tests.RxAppTest, ReactiveUI.Tests_Net45";
+                isInUnitTestRunner = Type.GetType(testAQN, false) != null;
             }
             return isInUnitTestRunner.GetValueOrDefault(false);
         }
