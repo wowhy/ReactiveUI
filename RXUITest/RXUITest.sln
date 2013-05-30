@@ -1,0 +1,60 @@
+﻿
+Microsoft Visual Studio Solution File, Format Version 12.00
+# Visual Studio 2012
+Project("{FAE04EC0-301F-11D3-BF4B-00C04F79EFBC}") = "RXUITest", "RXUITest\RXUITest.csproj", "{94219E40-7D08-4F32-9C33-4898FA4753A5}"
+EndProject
+Project("{FAE04EC0-301F-11D3-BF4B-00C04F79EFBC}") = "ReactiveUI.Cocoa_Monotouch", "..\ReactiveUI.Platforms\ReactiveUI.Cocoa_Monotouch.csproj", "{9091337A-9E94-4DBD-801E-15E1FDA78FFC}"
+EndProject
+Project("{FAE04EC0-301F-11D3-BF4B-00C04F79EFBC}") = "ReactiveUI_Monotouch", "..\ReactiveUI\ReactiveUI_Monotouch.csproj", "{9091337A-9E94-4DBD-801E-05E1FDA78FFC}"
+EndProject
+Global
+	GlobalSection(SolutionConfigurationPlatforms) = preSolution
+		Debug|iPhoneSimulator = Debug|iPhoneSimulator
+		Release|iPhoneSimulator = Release|iPhoneSimulator
+		Debug|iPhone = Debug|iPhone
+		Release|iPhone = Release|iPhone
+		Ad-Hoc|iPhone = Ad-Hoc|iPhone
+		AppStore|iPhone = AppStore|iPhone
+	EndGlobalSection
+	GlobalSection(ProjectConfigurationPlatforms) = postSolution
+		{9091337A-9E94-4DBD-801E-05E1FDA78FFC}.Ad-Hoc|iPhone.ActiveCfg = Release|Any CPU
+		{9091337A-9E94-4DBD-801E-05E1FDA78FFC}.Ad-Hoc|iPhone.Build.0 = Release|Any CPU
+		{9091337A-9E94-4DBD-801E-05E1FDA78FFC}.AppStore|iPhone.ActiveCfg = Release|Any CPU
+		{9091337A-9E94-4DBD-801E-05E1FDA78FFC}.AppStore|iPhone.Build.0 = Release|Any CPU
+		{9091337A-9E94-4DBD-801E-05E1FDA78FFC}.Debug|iPhone.ActiveCfg = Debug|Any CPU
+		{9091337A-9E94-4DBD-801E-05E1FDA78FFC}.Debug|iPhone.Build.0 = Debug|Any CPU
+		{9091337A-9E94-4DBD-801E-05E1FDA78FFC}.Debug|iPhoneSimulator.ActiveCfg = Debug|Any CPU
+		{9091337A-9E94-4DBD-801E-05E1FDA78FFC}.Debug|iPhoneSimulator.Build.0 = Debug|Any CPU
+		{9091337A-9E94-4DBD-801E-05E1FDA78FFC}.Release|iPhone.ActiveCfg = Release|Any CPU
+		{9091337A-9E94-4DBD-801E-05E1FDA78FFC}.Release|iPhone.Build.0 = Release|Any CPU
+		{9091337A-9E94-4DBD-801E-05E1FDA78FFC}.Release|iPhoneSimulator.ActiveCfg = Release|Any CPU
+		{9091337A-9E94-4DBD-801E-05E1FDA78FFC}.Release|iPhoneSimulator.Build.0 = Release|Any CPU
+		{9091337A-9E94-4DBD-801E-15E1FDA78FFC}.Ad-Hoc|iPhone.ActiveCfg = Release|Any CPU
+		{9091337A-9E94-4DBD-801E-15E1FDA78FFC}.Ad-Hoc|iPhone.Build.0 = Release|Any CPU
+		{9091337A-9E94-4DBD-801E-15E1FDA78FFC}.AppStore|iPhone.ActiveCfg = Release|Any CPU
+		{9091337A-9E94-4DBD-801E-15E1FDA78FFC}.AppStore|iPhone.Build.0 = Release|Any CPU
+		{9091337A-9E94-4DBD-801E-15E1FDA78FFC}.Debug|iPhone.ActiveCfg = Debug|Any CPU
+		{9091337A-9E94-4DBD-801E-15E1FDA78FFC}.Debug|iPhone.Build.0 = Debug|Any CPU
+		{9091337A-9E94-4DBD-801E-15E1FDA78FFC}.Debug|iPhoneSimulator.ActiveCfg = Debug|Any CPU
+		{9091337A-9E94-4DBD-801E-15E1FDA78FFC}.Debug|iPhoneSimulator.Build.0 = Debug|Any CPU
+		{9091337A-9E94-4DBD-801E-15E1FDA78FFC}.Release|iPhone.ActiveCfg = Release|Any CPU
+		{9091337A-9E94-4DBD-801E-15E1FDA78FFC}.Release|iPhone.Build.0 = Release|Any CPU
+		{9091337A-9E94-4DBD-801E-15E1FDA78FFC}.Release|iPhoneSimulator.ActiveCfg = Release|Any CPU
+		{9091337A-9E94-4DBD-801E-15E1FDA78FFC}.Release|iPhoneSimulator.Build.0 = Release|Any CPU
+		{94219E40-7D08-4F32-9C33-4898FA4753A5}.Ad-Hoc|iPhone.ActiveCfg = Ad-Hoc|iPhone
+		{94219E40-7D08-4F32-9C33-4898FA4753A5}.Ad-Hoc|iPhone.Build.0 = Ad-Hoc|iPhone
+		{94219E40-7D08-4F32-9C33-4898FA4753A5}.AppStore|iPhone.ActiveCfg = AppStore|iPhone
+		{94219E40-7D08-4F32-9C33-4898FA4753A5}.AppStore|iPhone.Build.0 = AppStore|iPhone
+		{94219E40-7D08-4F32-9C33-4898FA4753A5}.Debug|iPhone.ActiveCfg = Debug|iPhone
+		{94219E40-7D08-4F32-9C33-4898FA4753A5}.Debug|iPhone.Build.0 = Debug|iPhone
+		{94219E40-7D08-4F32-9C33-4898FA4753A5}.Debug|iPhoneSimulator.ActiveCfg = Debug|iPhoneSimulator
+		{94219E40-7D08-4F32-9C33-4898FA4753A5}.Debug|iPhoneSimulator.Build.0 = Debug|iPhoneSimulator
+		{94219E40-7D08-4F32-9C33-4898FA4753A5}.Release|iPhone.ActiveCfg = Release|iPhone
+		{94219E40-7D08-4F32-9C33-4898FA4753A5}.Release|iPhone.Build.0 = Release|iPhone
+		{94219E40-7D08-4F32-9C33-4898FA4753A5}.Release|iPhoneSimulator.ActiveCfg = Release|iPhoneSimulator
+		{94219E40-7D08-4F32-9C33-4898FA4753A5}.Release|iPhoneSimulator.Build.0 = Release|iPhoneSimulator
+	EndGlobalSection
+	GlobalSection(MonoDevelopProperties) = preSolution
+		StartupItem = RXUITest\RXUITest.csproj
+	EndGlobalSection
+EndGlobal
