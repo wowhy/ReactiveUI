@@ -57,13 +57,17 @@ namespace ReactiveUI
                 .Publish(true)
                 .RefCount();
 
-            CanExecuteObservable = canExecuteObs.DistinctUntilChanged();
+            CanExecuteObservable = canExecuteObs
+                .DistinctUntilChanged()
+                .ObserveOn(defaultScheduler);
 
             innerDisp = canExecuteObs.Subscribe(x => {
                 if (canExecuteLatest == x) return;
 
                 canExecuteLatest = x;
-                if (CanExecuteChanged != null) CanExecuteChanged(this, EventArgs.Empty);
+                if (CanExecuteChanged != null) {
+                    defaultScheduler.Schedule(() => CanExecuteChanged(this, EventArgs.Empty));
+                } 
             }, exceptions.OnNext);
         }
 
