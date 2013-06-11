@@ -86,13 +86,14 @@ namespace ReactiveUI.Mobile
                 var frame = Window.Current.Content as Frame;
 
                 if (frame == null) {
-                    page = RxApp.DependencyResolver.GetService<IViewFor>("InitialPage");
-
-                    frame = new Frame() {
-                        Content = page,
-                    };
-
+                    frame = new Frame();
                     Window.Current.Content = frame;
+                }
+
+                page = Window.Current.Content as IViewFor;
+                if (page == null) {
+                    page = RxApp.DependencyResolver.GetService<IViewFor>("InitialPage");
+                    frame.Content = (UIElement)page;
                 }
 
                 page.ViewModel = vm;
@@ -110,6 +111,9 @@ namespace ReactiveUI.Mobile
                 .Subscribe(_ => this.Log().Info("Persisted application state"));
 
             SuspensionHost.IsResuming
+                .Do(x => {
+                    this.Log().Debug("Resuming!");
+                })
                 .SelectMany(x => driver.LoadState<IApplicationRootState>())
                 .LoggedCatch(this,
                     Observable.Defer(() => Observable.Return(RxApp.DependencyResolver.GetService<IApplicationRootState>())),
