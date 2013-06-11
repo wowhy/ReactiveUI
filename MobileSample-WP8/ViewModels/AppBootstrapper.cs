@@ -8,46 +8,12 @@ using System.Text;
 using System.Threading.Tasks;
 using Microsoft.Phone.Shell;
 using Newtonsoft.Json;
-using Ninject;
 using ReactiveUI;
 using ReactiveUI.Mobile;
 using MobileSample_WP8.Views;
 
 namespace MobileSample_WP8.ViewModels
 {
-#if FALSE
-    public class AkavacheDriver : ISuspensionDriver, IEnableLogger
-    {
-        public AkavacheDriver(string applicationName)
-        {
-            BlobCache.ApplicationName = applicationName;
-            BlobCache.SerializerSettings = new JsonSerializerSettings()
-            {
-                ObjectCreationHandling = ObjectCreationHandling.Replace,
-                ReferenceLoopHandling = ReferenceLoopHandling.Ignore,
-                TypeNameHandling = TypeNameHandling.All,
-            };
-        }
-
-        public IObservable<T> LoadState<T>() where T : class, IApplicationRootState
-        {
-            return BlobCache.UserAccount.GetObjectAsync<T>("__AppState"); ; ; ;
-        }
-
-        public IObservable<Unit> SaveState<T>(T state) where T : class, IApplicationRootState
-        {
-            return BlobCache.UserAccount.InsertObject("__AppState", state)
-                .SelectMany(BlobCache.UserAccount.Flush());
-        }
-
-        public IObservable<Unit> InvalidateState()
-        {
-            BlobCache.UserAccount.InvalidateObject<object>("__AppState");
-            return Observable.Return(Unit.Default);
-        }
-    }
-#endif
-
     [DataContract]
     public class AppBootstrapper : ReactiveObject, IApplicationRootState
     {
@@ -58,24 +24,16 @@ namespace MobileSample_WP8.ViewModels
             set { _Router = (RoutingState) value; } // XXX: This is dumb.
         }
 
-        [IgnoreDataMember]
-        public IKernel Kernel { get; protected set; }
-
         public AppBootstrapper()
         {
             Router = new RoutingState();
 
-            Kernel = new StandardKernel();
-            Kernel.Bind<IViewFor<TestPage1ViewModel>>().To<TestPage1View>();
+            var resolver = RxApp.MutableResolver;
+            resolver.Register(() => new TestPage1ViewModel(this), typeof(TestPage1ViewModel));
+            resolver.Register(() => new TestPage1View(), typeof(IViewFor<TestPage1ViewModel>));
 
-            Kernel.Bind<IApplicationRootState>().ToConstant(this);
-
-            Kernel.Bind<IScreen>().ToConstant(this);
-
-            //RxApp.ConfigureServiceLocator(
-            //    (t, s) => Kernel.Get(t, s),
-            //    (t, s) => Kernel.GetAll(t, s),
-            //    (c, t, s) => { var r = Kernel.Bind(t).To(c); if (s != null) r.Named(s); });
+            resolver.RegisterConstant(this, typeof(IApplicationRootState));
+            resolver.RegisterConstant(this, typeof(IScreen));
 
             Router.Navigate.Execute(new TestPage1ViewModel(this));
         }

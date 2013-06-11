@@ -46,8 +46,7 @@ namespace MobileSample_WP8
                 PhoneApplicationService.Current.UserIdleDetectionMode = IdleDetectionMode.Disabled;
             }
 
-            //TODo get rid of ugly casting
-            ((ModernDependencyResolver)RxApp.DependencyResolver).Register(() => new AppBootstrapper(), typeof(IApplicationRootState));
+            RxApp.MutableResolver.Register(() => new AppBootstrapper(), typeof(IApplicationRootState));
 
             var host = RxApp.DependencyResolver.GetService<ISuspensionHost>();
             host.SetupDefaultSuspendResume();

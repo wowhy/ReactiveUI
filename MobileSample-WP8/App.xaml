@@ -6,11 +6,6 @@
     xmlns:shell="clr-namespace:Microsoft.Phone.Shell;assembly=Microsoft.Phone"
     xmlns:mobile="clr-namespace:ReactiveUI.Mobile;assembly=ReactiveUI.Mobile">
 
-    <!--Application Resources-->
-    <Application.Resources>
-        <local:LocalizedStrings xmlns:local="clr-namespace:MobileSample_WP8" x:Key="LocalizedStrings"/>
-    </Application.Resources>
-
     <Application.ApplicationLifetimeObjects>
         <!--Required object that handles lifetime events for the application-->
         <shell:PhoneApplicationService />
