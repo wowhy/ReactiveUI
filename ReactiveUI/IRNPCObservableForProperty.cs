@@ -14,7 +14,7 @@ namespace ReactiveUI
             // NB: Since every IRNPC is also an INPC, we need to bind more 
             // tightly than INPCObservableForProperty, so we return 10 here 
             // instead of one
-            return typeof (IReactiveNotifyPropertyChanged<>).GetTypeInfo().IsAssignableFrom(type.GetTypeInfo()) ? 10 : 0;
+            return typeof (IReactiveNotifyPropertyChanged<object>).GetTypeInfo().IsAssignableFrom(type.GetTypeInfo()) ? 10 : 0;
         }
 
         public IObservable<IObservedChange<object, object>> GetNotificationForProperty(object sender, string propertyName, bool beforeChanged = false)
