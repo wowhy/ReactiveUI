@@ -49,7 +49,7 @@ namespace MobileSample_WP8.ViewModels
 #endif
 
     [DataContract]
-    public class AppBootstrapper : ReactiveObject, IApplicationRootState
+    public class AppBootstrapper : ReactiveObject<AppBootstrapper>, IApplicationRootState
     {
         [DataMember] RoutingState _Router;
 

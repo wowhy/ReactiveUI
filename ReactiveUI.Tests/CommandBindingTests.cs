@@ -13,7 +13,7 @@ using Xunit;
 
 namespace ReactiveUI.Tests
 {
-    public class FakeViewModel : ReactiveObject
+    public class FakeViewModel : ReactiveObject<FakeViewModel>
     {
         public ReactiveCommand Cmd { get; protected set; }
 
@@ -123,7 +123,7 @@ namespace ReactiveUI.Tests
 #endif
     }
 
-    public class CommandBindViewModel : ReactiveObject
+    public class CommandBindViewModel : ReactiveObject<CommandBindViewModel>
     {
         public ReactiveCommand _Command1;
         public ReactiveCommand Command1 {

@@ -126,7 +126,7 @@ namespace ReactiveUI.Tests.Winforms
         }
     }
 
-    public class FakeWinformViewModel : ReactiveObject, IRoutableViewModel
+    public class FakeWinformViewModel : ReactiveObject<FakeWinformViewModel>, IRoutableViewModel
     {
         public string UrlPathSegment {
             get { return "fake"; }

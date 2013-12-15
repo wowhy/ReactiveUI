@@ -12,7 +12,7 @@ namespace Foobar.ViewModels
 
     public interface IBazViewModel : IRoutableViewModel {}
 
-    public class FooBarViewModel : ReactiveObject, IFooBarViewModel 
+    public class FooBarViewModel : ReactiveObject<FooBarViewModel>, IFooBarViewModel 
     {
         public string UrlPathSegment { get { return "foo"; } }
         public IScreen HostScreen { get; private set; }
@@ -23,7 +23,7 @@ namespace Foobar.ViewModels
         }
     }
 
-    public class BazViewModel : ReactiveObject, IBazViewModel 
+    public class BazViewModel : ReactiveObject<BazViewModel>, IBazViewModel 
     {
         public string UrlPathSegment { get { return "foo"; } }
         public IScreen HostScreen { get; private set; }

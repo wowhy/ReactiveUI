@@ -846,7 +846,7 @@ namespace ReactiveUI.Tests
 
         public class DerivedPropertyChanges
         {
-            private class ReactiveVisibilityItem<T> : ReactiveObject
+            private class ReactiveVisibilityItem<T> : ReactiveObject<ReactiveVisibilityItem<T>>
             {
                 private T _Value;
 
@@ -872,7 +872,7 @@ namespace ReactiveUI.Tests
             }
 
             [DebuggerDisplay("{Name} is {Age} years old and makes ${Salary}")]
-            private class ReactiveEmployee : ReactiveObject
+            private class ReactiveEmployee : ReactiveObject<ReactiveEmployee>
             {
                 string _Name;
                 public string Name

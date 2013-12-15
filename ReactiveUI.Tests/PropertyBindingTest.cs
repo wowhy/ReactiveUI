@@ -14,7 +14,7 @@ namespace ReactiveUI.Tests
         public string AnotherThing { get; set; }
     }
 
-    public class PropertyBindViewModel : ReactiveObject
+    public class PropertyBindViewModel : ReactiveObject<PropertyBindViewModel>
     {
         public string _Property1;
         public string Property1 {

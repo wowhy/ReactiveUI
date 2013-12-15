@@ -159,10 +159,10 @@
         }
     }
 
-   
-   
 
-    public class FakeViewModel : ReactiveObject
+
+
+    public class FakeViewModel : ReactiveObject<FakeViewModel>
     {
         public ReactiveCommand Cmd { get; protected set; }
 
@@ -191,7 +191,7 @@
         public FakeViewModel ViewModel { get; set; }
     }
 
-    public class WinformCommandBindViewModel : ReactiveObject
+    public class WinformCommandBindViewModel : ReactiveObject<WinformCommandBindViewModel>
     {
         private ReactiveCommand _Command1;
         public ReactiveCommand Command1

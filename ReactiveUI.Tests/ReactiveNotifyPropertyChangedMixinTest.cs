@@ -20,7 +20,7 @@ using ReactiveUI.Xaml;
 
 namespace ReactiveUI.Tests
 {
-    public class TestWhenAnyObsViewModel : ReactiveObject
+    public class TestWhenAnyObsViewModel : ReactiveObject<TestWhenAnyObsViewModel>
     {
         public ReactiveCommand Command1 { get; protected set; }
         public ReactiveCommand Command2 { get; protected set; }
@@ -32,7 +32,7 @@ namespace ReactiveUI.Tests
         }
     }
 
-    public class HostTestFixture : ReactiveObject
+    public class HostTestFixture : ReactiveObject<HostTestFixture>
     {
         public TestFixture _Child;
         public TestFixture Child {
@@ -78,7 +78,7 @@ namespace ReactiveUI.Tests
         }
     }
 
-    public class ObjChain1 : ReactiveObject
+    public class ObjChain1 : ReactiveObject<ObjChain1>
     {
         public ObjChain2 _Model = new ObjChain2();
         public ObjChain2 Model {
@@ -87,7 +87,7 @@ namespace ReactiveUI.Tests
         }
     }
 
-    public class ObjChain2 : ReactiveObject
+    public class ObjChain2 : ReactiveObject<ObjChain2>
     {
         public ObjChain3 _Model = new ObjChain3();
         public ObjChain3 Model {
@@ -96,7 +96,7 @@ namespace ReactiveUI.Tests
         }
     }
 
-    public class ObjChain3 : ReactiveObject
+    public class ObjChain3 : ReactiveObject<ObjChain3>
     {
         public HostTestFixture _Model = new HostTestFixture();
         public HostTestFixture Model {

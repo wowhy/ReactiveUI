@@ -6,7 +6,7 @@ using ReactiveUI.Xaml;
 namespace MobileSample_WinRT.ViewModels
 {
     [DataContract]
-    public class TestPage2ViewModel : ReactiveObject, IRoutableViewModel
+    public class TestPage2ViewModel : ReactiveObject<TestPage2ViewModel>, IRoutableViewModel
     {
         public string UrlPathSegment { get { return "test2"; } }
         public IScreen HostScreen { get; private set; }

@@ -24,7 +24,7 @@ namespace ReactiveUI.Routing.Tests
         }
     }
 
-    public class TestScreen : ReactiveObject, IScreen
+    public class TestScreen : ReactiveObject<TestScreen>, IScreen
     {
         IRoutingState _Router;
         public IRoutingState Router {

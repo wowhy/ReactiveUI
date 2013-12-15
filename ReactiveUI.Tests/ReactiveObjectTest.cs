@@ -8,7 +8,7 @@ using Xunit;
 namespace ReactiveUI.Tests
 {
     [DataContract]
-    public class TestFixture : ReactiveObject
+    public class TestFixture : ReactiveObject<TestFixture>
     {
         [IgnoreDataMember]
         string _IsNotNullString;
