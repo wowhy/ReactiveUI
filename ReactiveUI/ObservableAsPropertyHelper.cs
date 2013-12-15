@@ -122,7 +122,7 @@ namespace ReactiveUI
                 Expression<Func<TObj, TRet>> property,
                 TRet initialValue = default(TRet),
                 IScheduler scheduler = null)
-            where TObj : ReactiveObject
+            where TObj : ReactiveObject<TObj>
         {
             Contract.Requires(This != null);
             Contract.Requires(observable != null);
@@ -157,7 +157,7 @@ namespace ReactiveUI
             Expression<Func<TObj, TRet>> property,
             TRet initialValue = default(TRet),
             IScheduler scheduler = null)
-            where TObj : ReactiveObject
+            where TObj : ReactiveObject<TObj>
         {
             return source.observableToProperty(This, property, initialValue, scheduler);
         }
@@ -183,7 +183,7 @@ namespace ReactiveUI
             out ObservableAsPropertyHelper<TRet> result,
             TRet initialValue = default(TRet),
             IScheduler scheduler = null)
-            where TObj : ReactiveObject
+            where TObj : ReactiveObject<TObj>
         {
             var ret = source.observableToProperty(This, property, initialValue, scheduler);
 

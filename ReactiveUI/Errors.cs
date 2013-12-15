@@ -79,7 +79,7 @@ namespace ReactiveUI
     /// example an "Out of Disk Space" error might have an "Open Explorer"
     /// recovery option.
     /// </summary>
-    public class UserError : ReactiveObject
+    public class UserError : ReactiveObject<UserError>
     {
         public UserError(
                 string errorMessage,

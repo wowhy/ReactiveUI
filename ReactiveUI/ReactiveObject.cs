@@ -21,7 +21,8 @@ namespace ReactiveUI
     /// Changing and Changed Observables to monitor object changes.
     /// </summary>
     [DataContract]
-    public class ReactiveObject : IReactiveNotifyPropertyChanged, IHandleObservableErrors
+    public class ReactiveObject<T> : IReactiveNotifyPropertyChanged<T>, IHandleObservableErrors
+        where T : ReactiveObject<T>
     {
         [field:IgnoreDataMember]
         public event PropertyChangingEventHandler PropertyChanging;
@@ -34,7 +35,7 @@ namespace ReactiveUI
         /// be changed.         
         /// </summary>
         [IgnoreDataMember]
-        public IObservable<IObservedChange<object, object>> Changing {
+        public IObservable<IObservedChange<T, object>> Changing {
             get { return changingSubject; }
         }
 
@@ -42,7 +43,7 @@ namespace ReactiveUI
         /// Represents an Observable that fires *after* a property has changed.
         /// </summary>
         [IgnoreDataMember]
-        public IObservable<IObservedChange<object, object>> Changed {
+        public IObservable<IObservedChange<T, object>> Changed {
             get { return changedSubject; }
         }
 
@@ -50,10 +51,10 @@ namespace ReactiveUI
         protected Lazy<PropertyInfo[]> allPublicProperties;
 
         [IgnoreDataMember]
-        Subject<IObservedChange<object, object>> changingSubject;
+        Subject<IObservedChange<T, object>> changingSubject;
 
         [IgnoreDataMember]
-        Subject<IObservedChange<object, object>> changedSubject;
+        Subject<IObservedChange<T, object>> changedSubject;
 
         [IgnoreDataMember]
         long changeNotificationsSuppressed = 0;
@@ -74,8 +75,8 @@ namespace ReactiveUI
 
         void setupRxObj()
         {
-            changingSubject = changingSubject ?? new Subject<IObservedChange<object, object>>();
-            changedSubject  = changedSubject  ?? new Subject<IObservedChange<object, object>>();
+            changingSubject = changingSubject ?? new Subject<IObservedChange<T, object>>();
+            changedSubject  = changedSubject  ?? new Subject<IObservedChange<T, object>>();
 
             allPublicProperties = allPublicProperties ??
                 new Lazy<PropertyInfo[]>(() =>
@@ -111,8 +112,8 @@ namespace ReactiveUI
                 handler(this, e);
             }
 
-            notifyObservable(new ObservedChange<object, object>() {
-                PropertyName = propertyName, Sender = this, Value = null
+            notifyObservable(new ObservedChange<T, object>() {
+                PropertyName = propertyName, Sender = (T)this, Value = null
             }, changingSubject);
         }
 
@@ -133,8 +134,8 @@ namespace ReactiveUI
                 handler(this, e);
             }
 
-            notifyObservable(new ObservedChange<object, object>() {
-                PropertyName = propertyName, Sender = this, Value = null
+            notifyObservable(new ObservedChange<T, object>() {
+                PropertyName = propertyName, Sender = (T)this, Value = null
             }, changedSubject);
         }
 
@@ -176,7 +177,7 @@ namespace ReactiveUI
                 ref TRet backingField,
                 TRet newValue,
                 [CallerMemberName] string propertyName = null)
-            where TObj : ReactiveObject
+            where TObj : ReactiveObject<TObj>
         {
             Contract.Requires(This != null);
             Contract.Requires(propertyName != null);
@@ -203,7 +204,7 @@ namespace ReactiveUI
         public static void RaisePropertyChanged<TObj>(
                 this TObj This,
                 [CallerMemberName] string propertyName = null)
-            where TObj : ReactiveObject
+            where TObj : ReactiveObject<TObj>
         {
             This.raisePropertyChanged(propertyName);
         }
@@ -220,7 +221,7 @@ namespace ReactiveUI
         public static void RaisePropertyChanging<TObj>(
                 this TObj This,
                 [CallerMemberName] string propertyName = null)
-            where TObj : ReactiveObject
+            where TObj : ReactiveObject<TObj>
         {
             This.raisePropertyChanging(propertyName);
         }
@@ -238,7 +239,8 @@ namespace ReactiveUI.Testing
         /// <param name="target">The ReactiveObject to invoke
         /// raisePropertyChanging on.</param>
         /// <param name="property">The property that will be faking a change.</param>
-        public static void RaisePropertyChanging(ReactiveObject target, string property)
+        public static void RaisePropertyChanging<TSender>(TSender target, string property)
+            where TSender : ReactiveObject<TSender>
         {
             target.raisePropertyChanging(property);
         }
@@ -251,7 +253,7 @@ namespace ReactiveUI.Testing
         /// raisePropertyChanging on.</param>
         /// <param name="property">The property that will be faking a change.</param>
         public static void RaisePropertyChanging<TSender, TValue>(TSender target, Expression<Func<TSender, TValue>> property)
-            where TSender : ReactiveObject
+            where TSender : ReactiveObject<TSender>
         {
             RaisePropertyChanging(target, Reflection.SimpleExpressionToPropertyName(property));
         }
@@ -263,7 +265,8 @@ namespace ReactiveUI.Testing
         /// <param name="target">The ReactiveObject to invoke
         /// raisePropertyChanging on.</param>
         /// <param name="property">The property that will be faking a change.</param>
-        public static void RaisePropertyChanged(ReactiveObject target, string property)
+        public static void RaisePropertyChanged<TSender>(TSender target, string property)
+            where TSender : ReactiveObject<TSender>
         {
             target.raisePropertyChanged(property);
         }
@@ -276,7 +279,7 @@ namespace ReactiveUI.Testing
         /// raisePropertyChanging on.</param>
         /// <param name="property">The property that will be faking a change.</param>
         public static void RaisePropertyChanged<TSender, TValue>(TSender target, Expression<Func<TSender, TValue>> property)
-            where TSender : ReactiveObject
+            where TSender : ReactiveObject<TSender>
         {
             RaisePropertyChanged(target, Reflection.SimpleExpressionToPropertyName(property));
         }

@@ -14,7 +14,7 @@ namespace ReactiveUI
     /// navigate to other ViewModels.
     /// </summary>
     [DataContract]
-    public class RoutingState : ReactiveObject, IRoutingState
+    public class RoutingState : ReactiveObject<RoutingState>, IRoutingState
     {
         [DataMember] ReactiveList<IRoutableViewModel> _NavigationStack;
 

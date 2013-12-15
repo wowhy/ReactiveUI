@@ -235,7 +235,7 @@ namespace ReactiveUI
                     }
                 }
             } else {
-                var irncc = source as IReactiveNotifyCollectionChanged;
+                var irncc = source as IReactiveNotifyCollectionChanged<TSource>;
                 var eventObs = irncc != null
                     ? irncc.Changed
                     : Observable
