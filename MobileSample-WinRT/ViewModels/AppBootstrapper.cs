@@ -14,7 +14,7 @@ using MobileSample_WinRT.Views;
 namespace MobileSample_WinRT.ViewModels
 {
     [DataContract]
-    public class AppBootstrapper : ReactiveObject, IApplicationRootState
+    public class AppBootstrapper : ReactiveObject<AppBootstrapper>, IApplicationRootState
     {
         [DataMember] RoutingState _Router;
 
