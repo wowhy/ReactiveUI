@@ -218,9 +218,9 @@ namespace ReactiveUI
                     return false;
                 }
 
-                var box = new ObservedChange<object, object> { Sender = current, PropertyName = propName };
+                var sender = current;
                 current = GetValueFetcherOrThrow(current.GetType(), propName)(current);
-                box.Value = current;
+                var box = new ObservedChange<object, object>(sender, propName, current);
 
                 changeValues[currentIndex] = box;
                 currentIndex++;
@@ -231,11 +231,7 @@ namespace ReactiveUI
                 return false;
             }
 
-            changeValues[currentIndex] = new ObservedChange<object, object> {
-                Sender = current,
-                PropertyName = propNames.Last(),
-                Value = GetValueFetcherOrThrow(current.GetType(), propNames.Last())(current)
-            };
+            changeValues[currentIndex] = new ObservedChange<object, object>(current, propNames.Last(), GetValueFetcherOrThrow(current.GetType(), propNames.Last())(current));
 
             return true;
         }

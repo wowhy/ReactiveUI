@@ -529,7 +529,7 @@ namespace ReactiveUI
             var inpc = toTrack as INotifyPropertyChanged;
             if (inpc != null) {
                 changed = Observable.FromEventPattern<PropertyChangedEventHandler, PropertyChangedEventArgs>(x => inpc.PropertyChanged += x, x => inpc.PropertyChanged -= x)
-                    .Select(x => new ObservedChange<T, object>() { PropertyName = x.EventArgs.PropertyName, Sender = toTrack });
+                    .Select(x => new ObservedChange<T, object>(toTrack, x.EventArgs.PropertyName));
                 goto isSetup;
             }
 
@@ -538,11 +538,9 @@ namespace ReactiveUI
         isSetup:
             var toDispose = new[] {
                 changing.Where(_ => this._suppressionRefCount == 0).Subscribe(beforeChange =>
-                    _itemChanging.Value.OnNext(new ObservedChange<T, object>() {
-                        Sender = toTrack, PropertyName = beforeChange.PropertyName })),
+                    _itemChanging.Value.OnNext(new ObservedChange<T, object>(toTrack, beforeChange.PropertyName))),
                 changed.Where(_ => this._suppressionRefCount == 0).Subscribe(change =>
-                    _itemChanged.Value.OnNext(new ObservedChange<T,object>() {
-                        Sender = toTrack, PropertyName = change.PropertyName })),
+                    _itemChanged.Value.OnNext(new ObservedChange<T,object>(toTrack, change.PropertyName))),
             };
 
             _propertyChangeWatchers.Add(toTrack, 

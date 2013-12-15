@@ -112,9 +112,7 @@ namespace ReactiveUI
                 handler(this, e);
             }
 
-            notifyObservable(new ObservedChange<T, object>() {
-                PropertyName = propertyName, Sender = (T)this, Value = null
-            }, changingSubject);
+            notifyObservable(new ObservedChange<T, object>((T)this, propertyName), changingSubject);
         }
 
         protected internal virtual void raisePropertyChanged(string propertyName)
@@ -134,9 +132,7 @@ namespace ReactiveUI
                 handler(this, e);
             }
 
-            notifyObservable(new ObservedChange<T, object>() {
-                PropertyName = propertyName, Sender = (T)this, Value = null
-            }, changedSubject);
+            notifyObservable(new ObservedChange<T, object>((T)this, propertyName), changedSubject);
         }
 
         protected bool areChangeNotificationsEnabled {
