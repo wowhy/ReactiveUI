@@ -8,11 +8,11 @@ using Xunit;
 
 namespace Foobar.ViewModels
 {
-    public interface IFooBarViewModel : IRoutableViewModel {}
+    public interface IFooBarViewModel<out T> : IRoutableViewModel<T> {}
 
-    public interface IBazViewModel : IRoutableViewModel {}
+    public interface IBazViewModel<out T> : IRoutableViewModel<T> { }
 
-    public class FooBarViewModel : ReactiveObject<FooBarViewModel>, IFooBarViewModel 
+    public class FooBarViewModel : ReactiveObject<FooBarViewModel>, IFooBarViewModel<FooBarViewModel>
     {
         public string UrlPathSegment { get { return "foo"; } }
         public IScreen HostScreen { get; private set; }
@@ -23,7 +23,7 @@ namespace Foobar.ViewModels
         }
     }
 
-    public class BazViewModel : ReactiveObject<BazViewModel>, IBazViewModel 
+    public class BazViewModel : ReactiveObject<BazViewModel>, IBazViewModel<BazViewModel>
     {
         public string UrlPathSegment { get { return "foo"; } }
         public IScreen HostScreen { get; private set; }
@@ -39,18 +39,18 @@ namespace Foobar.Views
 {
     using ViewModels;
 
-    public class FooBarView : IViewFor<IFooBarViewModel> 
+    public class FooBarView : IViewFor<IFooBarViewModel<FooBarViewModel>> 
     {
-        object IViewFor.ViewModel { get { return ViewModel; } set { ViewModel = (IFooBarViewModel) value; } }
-        public IFooBarViewModel ViewModel { get; set; }
+        object IViewFor.ViewModel { get { return ViewModel; } set { ViewModel = (IFooBarViewModel<FooBarViewModel>)value; } }
+        public IFooBarViewModel<FooBarViewModel> ViewModel { get; set; }
     }
 
-    public interface IBazView : IViewFor<IBazViewModel> {}
+    public interface IBazView : IViewFor<IBazViewModel<BazViewModel>> { }
 
     public class BazView : IBazView 
     {
-        object IViewFor.ViewModel { get { return ViewModel; } set { ViewModel = (IBazViewModel)value; } }
-        public IBazViewModel ViewModel { get; set; }
+        object IViewFor.ViewModel { get { return ViewModel; } set { ViewModel = (IBazViewModel<BazViewModel>)value; } }
+        public IBazViewModel<BazViewModel> ViewModel { get; set; }
     }
 }
 

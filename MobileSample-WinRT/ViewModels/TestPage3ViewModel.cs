@@ -5,7 +5,7 @@ using ReactiveUI;
 namespace MobileSample_WinRT.ViewModels
 {
     [DataContract]
-    public class TestPage3ViewModel : ReactiveObject<TestPage3ViewModel>, IRoutableViewModel
+    public class TestPage3ViewModel : ReactiveObject<TestPage3ViewModel>, IRoutableViewModel<TestPage3ViewModel>
     {
         public string UrlPathSegment { get { return "test3"; } }
         public IScreen HostScreen { get; private set; }

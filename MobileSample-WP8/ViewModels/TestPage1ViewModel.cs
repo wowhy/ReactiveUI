@@ -5,7 +5,7 @@ using ReactiveUI;
 namespace MobileSample_WP8.ViewModels
 {
     [DataContract]
-    public class TestPage1ViewModel : ReactiveObject<TestPage1ViewModel>, IRoutableViewModel
+    public class TestPage1ViewModel : ReactiveObject<TestPage1ViewModel>, IRoutableViewModel<TestPage1ViewModel>
     {
         public string UrlPathSegment { get { return "test1"; } }
         public IScreen HostScreen { get; private set; }

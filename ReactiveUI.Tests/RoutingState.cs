@@ -6,7 +6,7 @@ using Xunit;
 
 namespace ReactiveUI.Routing.Tests
 {
-    public class TestViewModel : ReactiveObject<TestViewModel>, IRoutableViewModel
+    public class TestViewModel : ReactiveObject<TestViewModel>, IRoutableViewModel<TestViewModel>
     {
         string _SomeProp;
         public string SomeProp {

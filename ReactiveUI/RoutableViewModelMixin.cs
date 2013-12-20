@@ -18,7 +18,7 @@ namespace ReactiveUI
         /// configured in the method.</param>
         /// <returns>An IDisposable that lets you disconnect the entire process
         /// earlier than normal.</returns>
-        public static IDisposable WhenNavigatedTo(this IRoutableViewModel This, Func<IDisposable> onNavigatedTo)
+        public static IDisposable WhenNavigatedTo<T>(this IRoutableViewModel<T> This, Func<IDisposable> onNavigatedTo)
         {
             IDisposable inner = null;
 

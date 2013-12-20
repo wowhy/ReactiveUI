@@ -336,7 +336,7 @@ namespace ReactiveUI
         /// Represents the current navigation stack, the last element in the
         /// collection being the currently visible ViewModel.
         /// </summary>
-        ReactiveList<IRoutableViewModel> NavigationStack { get; }
+        ReactiveList<IRoutableViewModel<object>> NavigationStack { get; }
 
         /// <summary>
         /// Navigates back to the previous element in the stack.
@@ -357,13 +357,13 @@ namespace ReactiveUI
         /// </summary>
         INavigateCommand NavigateAndReset { get; }
 
-        IObservable<IRoutableViewModel> CurrentViewModel { get; }
+        IObservable<IRoutableViewModel<object>> CurrentViewModel { get; }
     }
 
     /// <summary>
     /// Implement this interface for ViewModels that can be navigated to.
     /// </summary>
-    public interface IRoutableViewModel : IEnableLogger
+    public interface IRoutableViewModel<out T> : IReactiveNotifyPropertyChanged<T>, IEnableLogger
     {
         /// <summary>
         /// A string token representing the current ViewModel, such as 'login' or 'user'

@@ -16,14 +16,15 @@ namespace ReactiveUI
     [DataContract]
     public class RoutingState : ReactiveObject<RoutingState>, IRoutingState
     {
-        [DataMember] ReactiveList<IRoutableViewModel> _NavigationStack;
+        [DataMember] ReactiveList<IRoutableViewModel<object>> _NavigationStack;
 
         /// <summary>
         /// Represents the current navigation stack, the last element in the
         /// collection being the currently visible ViewModel.
         /// </summary>
         [IgnoreDataMember]
-        public ReactiveList<IRoutableViewModel> NavigationStack {
+        public ReactiveList<IRoutableViewModel<object>> NavigationStack
+        {
             get { return _NavigationStack; }
             protected set { _NavigationStack = value; }
         }
@@ -51,11 +52,11 @@ namespace ReactiveUI
         public INavigateCommand NavigateAndReset { get; protected set; }
 
         [IgnoreDataMember]
-        public IObservable<IRoutableViewModel> CurrentViewModel { get; protected set; }
+        public IObservable<IRoutableViewModel<object>> CurrentViewModel { get; protected set; }
 
         public RoutingState()
         {
-            _NavigationStack = new ReactiveList<IRoutableViewModel>();
+            _NavigationStack = new ReactiveList<IRoutableViewModel<object>>();
             setupRx();
         }
 
@@ -71,7 +72,7 @@ namespace ReactiveUI
 
             Navigate = new NavigationReactiveCommand();
             Navigate.Subscribe(x => {
-                var vm = x as IRoutableViewModel;
+                var vm = x as IRoutableViewModel<object>;
                 if (vm == null) {
                     throw new Exception("Navigate must be called on an IRoutableViewModel");
                 }
@@ -100,7 +101,7 @@ namespace ReactiveUI
         /// </summary>
         /// <returns>The matching ViewModel or null if none exists.</returns>
         public static T FindViewModelInStack<T>(this IRoutingState This)
-            where T : IRoutableViewModel
+            where T : IRoutableViewModel<T>
         {
             return This.NavigationStack.Reverse().OfType<T>().FirstOrDefault();
         }
@@ -108,7 +109,7 @@ namespace ReactiveUI
         /// <summary>
         /// Returns the currently visible ViewModel
         /// </summary>
-        public static IRoutableViewModel GetCurrentViewModel(this IRoutingState This)
+        public static IRoutableViewModel<object> GetCurrentViewModel(this IRoutingState This)
         {
             return This.NavigationStack.LastOrDefault();
         }
@@ -119,10 +120,10 @@ namespace ReactiveUI
         /// Dependency Resolver.
         /// </summary>
         public static IReactiveCommand NavigateCommandFor<T>(this IRoutingState This)
-            where T : IRoutableViewModel
+            where T : IRoutableViewModel<T>
         {
             var ret = new ReactiveCommand(This.Navigate.CanExecuteObservable);
-                ret.Select(_ => (IRoutableViewModel)RxApp.DependencyResolver.GetService<T>()).InvokeCommand(This.Navigate);
+            ret.Select(_ => (IRoutableViewModel<object>)RxApp.DependencyResolver.GetService<T>()).InvokeCommand(This.Navigate);
                 return ret;
         }
     }
